@@ -1,0 +1,21 @@
+<view class="index">
+    <navigator url="/pages/analyze/analyze">
+        <view class="analyze">
+            <view class="analyze_icon">
+                <image src="/static/img/ssq.png" mode="aspectFit"></image>
+            </view>
+            <view class="analyze_text"><text>随机一注分析</text></view>
+        </view>
+    </navigator>
+
+    <view class="query" bindtap="chooseCropImage">
+        <view class="query_icon">
+            <image src="/static/img/camera.png" mode="aspectFit"></image>
+        </view>
+        <view class="query_text"><text>拍照查询中奖</text></view>
+    </view>
+
+    <simple-crop wx:if="{{visible}}" size="{{size}}" src="{{src}}" cropSizePercent="{{cropSizePercent}}" borderColor="{{borderColor}}" bindcropUpload="uploadCallback" bindcropClose="closeCallback" bindcropCrop="cropCallback"></simple-crop>
+    <!-- <image mode="widthFix" src="{{result}}"></image> -->
+
+</view>

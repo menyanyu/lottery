@@ -1,0 +1,2 @@
+<view style="color: {{color}}; font-size: {{size}}px; font-weight: {{bold?600:500}};">{{startVal}}</view>
+<!-- <button bindtap="start">提交</button> -->

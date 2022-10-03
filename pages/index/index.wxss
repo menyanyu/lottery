@@ -1,0 +1,43 @@
+.index{
+    margin: 0 10rpx;
+}
+.analyze{
+    margin: 50rpx 0;
+    width: 100%;
+    height: 200rpx;
+    background-color: #FF616F;
+    border-radius: 30rpx;
+    display: flex;
+    align-items: center;
+}
+.analyze_icon, .query_icon{
+    width: 300rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border:1rpx solid #FFFFFF; */
+}
+.analyze_icon image{
+    height: 170rpx;
+    width: 170rpx;
+}
+.analyze_text, .query_text{
+    font-size: 50rpx;
+    color: #FFFFFF;
+}
+.query{
+    margin: 50rpx 0;
+    width: 100%;
+    height: 200rpx;
+    background-color: #99e96b;
+    border-radius: 30rpx;
+    display: flex;
+    align-items: center;
+}
+.query_icon image{
+    border-radius: 50%;
+    background-color: rgb(255, 252, 96);
+    padding-bottom: 3rpx;
+    height: 170rpx;
+    width: 170rpx;
+}

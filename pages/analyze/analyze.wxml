@@ -1,0 +1,2 @@
+<count size="50" color="#ff0000" useEasing id="count" duration="1500" endVal="100"></count>
+<button bindtap="startRoll">数字滚动</button>

@@ -1,0 +1,210 @@
+.title{
+    font-weight: 600;
+    font-size: 30rpx;
+    color: #383838;
+    padding: 30rpx 0;
+    display: flex;
+    justify-content: center;
+}
+.title text{
+    width: 560rpx;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.table{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+/* .table_box{
+
+} */
+.tableHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.redBallTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80rpx;
+    height: 70rpx;
+    color: #ffffff;
+    font-size: 24rpx;
+    outline: 1rpx solid #aaaaaa;
+    background-color: #fa8080;
+}
+.blueBallTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80rpx;
+    height: 70rpx;
+    color: #ffffff;
+    font-size: 24rpx;
+    outline: 1rpx solid #aaaaaa;
+    background-color: #4293FC;
+}
+.tableContent{
+    width: 560rpx;
+    height: 70rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.balls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80rpx;
+    height: 100%;
+    outline: 1rpx solid #aaaaaa;
+    background-color: #ffffff;
+}
+
+.buttonGroup{
+    padding: 50rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.retry{
+    background-color: #4293FC;
+    border-radius: 50rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    height: 80rpx;
+    box-shadow: 1px 0 5px #aaaaaa;
+    padding: 0 40rpx 5rpx 40rpx;
+}
+.submit{
+    background-color: #4293FC;
+    border-radius: 50rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    height: 80rpx;
+    box-shadow: 1px 0 5px #aaaaaa;
+    padding: 0 70rpx 5rpx 70rpx;
+}
+.analysisResultsBox{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    padding: 30rpx 0 100rpx 0;
+}
+.openLottery_date,.openLottery_number {
+    display: flex;
+    justify-content: center;
+    width: 560rpx;
+    color: #dab200;
+    font-weight: 600;
+}
+/*  
+.analysisResultContent{
+    padding: 100rpx 0;
+}
+.myNumberArr{
+    width: 560rpx;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.myNumber{  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.myNumber_item{
+    outline: 1rpx solid #aaaaaa;
+    position: relative;
+    width: 80rpx;
+    height: 70rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+
+}
+
+
+.checkMark{
+    width: 35rpx;
+    height: 35rpx;
+    position: absolute;
+    bottom: 0;
+    right: 5rpx;
+}
+
+.myNumber_result{
+    width: 560rpx;
+    display: flex;
+    justify-content: center;
+    color: #D94D7F;
+    font-weight: 600;
+    font-size: 30rpx;
+    padding: 10rpx 0 50rpx 0;
+}
+*/
+
+.resultBox{
+    padding: 60rpx 0 100rpx 0;
+}
+
+.analysisResultContent{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+.numbers{
+    width: 80rpx;
+    height: 70rpx;
+    outline: 1rpx solid #8d8d8d;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.redNumber{
+    color: #ff7474;
+}
+.blueNumber{
+    color: #4495ff;
+}
+
+.redTick{
+    position: absolute;
+    width: 35rpx;
+    height: 35rpx;
+    bottom: 0;
+    right: 5rpx;
+}
+.blueTick{
+    position: absolute;
+    width: 35rpx;
+    height: 35rpx;
+    bottom: 0;
+    right: 5rpx;
+}
+.resultText{
+    width: 560rpx;
+    display: flex;
+    justify-content: center;
+    color: #D94D7F;
+    font-weight: 600;
+    font-size: 30rpx;
+    margin: 20rpx 0 50rpx 0;
+}

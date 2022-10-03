@@ -1,0 +1,55 @@
+<view class="confirm">
+
+    <view class="title">
+        <text class="title">信息确认：请确认以下信息是否正确，如果多次识别仍不准确，请确认票面是否干净、平整，您的彩票开奖期是：{{expect}}，您的彩票号码如下：</text>
+    </view>
+
+    <view class="table">
+        <view class="table_box">
+            <view class="tableHeader">
+                <view class="redBallTitle" wx:for="{{6}}" wx:key="index">NO{{item+1}}</view>
+                <view class="blueBallTitle">蓝号</view>
+            </view>
+            <view class="tableContent" wx:for="{{myBallArr}}" wx:key="index">
+                <view wx:for="{{item}}" wx:key="index" class="balls">
+                    <view>{{item}}</view>
+
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="buttonGroup">
+        <view class="retry" bindtap="retry">重新识别</view>
+        <view class="submit" bindtap="submit">确 定</view>
+    </view>
+
+    <view wx:if="{{analysisResults}}" class="analysisResultsBox">
+        <view class="title">
+            <text>{{analysisResultTitle}}</text>
+        </view>
+        <view class="openLottery_date">{{expect}}期开奖号码为</view>
+        <view class="openLottery_number">{{lotteryNumber}}</view>
+        <view class="resultBox">
+            <view class="analysisResultContent" wx:for="{{myBallObj}}" wx:for-item="it" wx:key-index="in" wx:key="in">
+                <!-- 红号 start -->
+                <view class="numbers redNumber" wx:for="{{it.myRedBall}}" wx:key="index">
+                    <text>{{item}}</text>
+                    <image wx:if="{{item== lotteryNumberRed[0]||item ==lotteryNumberRed[1]||item ==lotteryNumberRed[2]||item ==lotteryNumberRed[3]||item ==lotteryNumberRed[4]||item ==lotteryNumberRed[5]}}" class="redTick" src="../../static/img/tick.svg"></image>
+                </view>
+                <!-- 红号 end -->
+
+
+                <!-- 蓝号 start -->
+                <view class="numbers blueNumber">
+                    <text>{{it.myBlueBall}}</text>
+                    <image wx:if="{{it.myBlueBall==lotteryNumberBlue}}" class="blueTick" src="../../static/img/tick.svg"></image>
+                </view>
+                <!-- 蓝号 end -->
+                <view class="resultText">分析结果：{{it.analysisResult}}</view>
+            </view>
+            
+        </view>
+
+
+    </view>
+</view>

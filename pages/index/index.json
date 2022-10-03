@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "count": "/components/count/count",
+        "simple-crop":"/components/simple-crop/index"
+    }
+}
