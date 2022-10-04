@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000/users"
+const baseUrl = "https//api.wsgsb.com/users"
 const request = (options) => {
     return new Promise((resolve, reject) => {
         wx.request({

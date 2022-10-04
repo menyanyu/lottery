@@ -1,1 +1,26 @@
-/* pages/analyze/analyze.wxss */
+.balls{
+    display: flex;
+    justify-content: center;
+    padding: 30rpx 0;
+}
+.redBallBox{
+    width: 75rpx;
+    height: 75rpx;
+    background-color: #ff5252;
+    border-radius: 50%;
+    box-shadow: 0rpx 0rpx 10rpx #e67777;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20rpx;
+}
+.blueBallBox{
+    width: 75rpx;
+    height: 75rpx;
+    background-color: #528fff;
+    border-radius: 50%;
+    box-shadow: 0rpx 0rpx 10rpx #70a2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

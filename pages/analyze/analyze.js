@@ -4,12 +4,58 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        redBallList: [0, 0, 0, 0, 0, 0],
+        blueBall: 0,
+        delay: "500",
+        btnDis: false,
+        redDuration: 1500,
+        blueDuration: 1500
     },
 
     startRoll() {
-        const compData=this.selectComponent("#count")
-        compData.start();
+        const p = new Promise((resolve, reject) => {
+            this.randomNum()
+            for (let i = 0; i < 6; i++) {
+                var t1 = setTimeout(() => {
+                    this.selectComponent(`#reds${[i]}`).start();
+                    this.setData({
+                        btnDis: true
+                    })
+                }, i * this.data.delay);
+            }
+            const t2 = setTimeout(() => {
+                this.selectComponent("#blue").start();
+                resolve()
+            }, 8 * this.data.delay);
+
+        }).then(() => {
+            const t3 = setTimeout(() => {
+                this.setData({
+                    btnDis: false
+                })
+            }, this.data.blueDuration);
+        })
+    },
+
+    //获取随机数
+    randomNum() {
+        let list = [];
+        let blue = Math.ceil(Math.random() * 16);
+        while (list.length < 6) {
+            let num = Math.ceil(Math.random() * 33);
+            if (list.indexOf(num) == -1) {
+                list.push(num)
+                list.sort(function (a, b) {
+                    return a - b
+                });
+            }
+        }
+
+        this.setData({
+            redBallList: list,
+            blueBall: blue
+        })
+
     },
 
     /**

@@ -30,10 +30,9 @@ Component({
         }
     },
     data: {
-
     },
     methods: {
-        
+
         // 开始滚动
         start() {
             var time = Math.ceil(this.properties.duration / this.properties.endVal)
@@ -57,7 +56,7 @@ Component({
                                 startVal: ++res
                             })
                             if (this.properties.startVal == this.properties.endVal) {
-                                clearInterval(t2)
+                                clearTimeout(t2)
                                 this.properties.startVal = 0
                             }
                         }, i * i * i *  20);

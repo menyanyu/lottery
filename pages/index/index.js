@@ -59,10 +59,20 @@ Page({
             encoding: "base64", //指定读取文件的字符编码
             success: (res) => {
 
+                // wx.request({
+                // method: 'GET',
+                //   url: 'https://api.wsgsb.com/users/latest',
+                //   success:(res)=>{
+                //     console.log(res)
+                //   }
+                // })
+
+                
                 //截图转成base64后上传到后端
                 wx.request({
                     method: 'POST',
-                    url: 'http://localhost:3000/users/upload',
+                    url: 'https//api.wsgsb.com/users/upload/',
+                    timeout:10000,
                     data: { image: res.data },
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded;' },
                     success: (res) => {
@@ -82,7 +92,7 @@ Page({
                                 return ballArr
                             })
                             const expectStr = String(this.delNull(getLotteryPeriod))
-                            
+
                             const patt = /开奖期/g;
                             const testing = patt.test(expectStr); 
                             if (!testing) {
@@ -92,8 +102,6 @@ Page({
                                 })
                                 return
                             }
-                            // console.log(testing)
-
                             const expect = expectStr.slice(4, 11)
                             let regBall = /[A-Z]\.[0-9-]+/g
 
@@ -122,14 +130,17 @@ Page({
                             })
                             // console.log(LotteryDataObj)
                         }
-                    }
+                    },
+                    fail:((errMsg,code)=>{
+                        console.log(errMsg,code)
+                    })
                 })
             }
         })
 
 
         // wx.uploadFile({
-        //     url: 'http://localhost:3000/users/updata/screenshot',
+        //     url: 'https//api.wsgsb.com/users/updata/screenshot',
         //     filePath: event.detail.resultSrc,
         //     header: {
         //         "Content-Type": "multipart/form-data"

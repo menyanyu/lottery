@@ -3,7 +3,7 @@
     "projectname": "lottery",
     "setting": {
         "compileHotReLoad": true,
-        "urlCheck": false
+        "urlCheck": true
     },
     "condition": {
         "miniprogram": {
@@ -11,6 +11,13 @@
                 {
                     "name": "",
                     "pathName": "pages/confirm/confirm",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/analyze/analyze",
                     "query": "",
                     "launchMode": "default",
                     "scene": null
