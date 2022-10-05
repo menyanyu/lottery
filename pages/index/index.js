@@ -24,6 +24,18 @@ Page({
         return array;
     },
 
+    //分割字符串（要分割的字符串，每隔几位数分割）
+    division(str, digit){
+        let arr = [];
+        for (let i = 0, len = str.length / digit; i < len; i++) {
+          let subStr = str.substr(0, digit);
+          arr.push(subStr);
+          str = str.replace(subStr, "");
+        }
+        return arr;
+      },
+
+
     //拍照或选取图片进行裁剪
     chooseCropImage() {
         wx.chooseMedia({
@@ -33,6 +45,7 @@ Page({
             sizeType: 'compressed',
             camera: 'back',
             success: (res) => {
+                wx.clearStorage()
                 this.setData({
                     visible: true,
                     src: res.tempFiles[0].tempFilePath,
@@ -58,31 +71,22 @@ Page({
             filePath: event.detail.resultSrc, //要读取的文件的路径 (本地路径)
             encoding: "base64", //指定读取文件的字符编码
             success: (res) => {
-
-                // wx.request({
-                // method: 'GET',
-                //   url: 'https://api.wsgsb.com/users/latest',
-                //   success:(res)=>{
-                //     console.log(res)
-                //   }
-                // })
-
-                
+                wx.showLoading({
+                    title: '加载中',
+                })
                 //截图转成base64后上传到后端
                 wx.request({
-                    method: 'POST',
-                    url: 'https//api.wsgsb.com/users/upload/',
-                    timeout:10000,
-                    data: { image: res.data },
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded;' },
-                    success: (res) => {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    url: 'https://api.wsgsb.com/users/upload',
+                    data: { "image": res.data },
+                    success: res => {
                         if (res == "") {
                             wx.showToast({
                                 title: '获取图片信息失败',
                                 icon: 'error'
                             })
                         } else {
-
                             /* 格式化数据 start */
                             const arr = res.data.data.words_result
                             const regExpect = /(开奖期:\d+-\d+-\d+)|(开奖期：\d+-\d+-\d+)/g
@@ -94,11 +98,11 @@ Page({
                             const expectStr = String(this.delNull(getLotteryPeriod))
 
                             const patt = /开奖期/g;
-                            const testing = patt.test(expectStr); 
+                            const testing = patt.test(expectStr);
                             if (!testing) {
                                 wx.showToast({
-                                  title: '未检测到彩票',
-                                  icon: 'error'
+                                    title: '未检测到彩票',
+                                    icon: 'error'
                                 })
                                 return
                             }
@@ -111,9 +115,10 @@ Page({
                             })
                             let balls = this.delNull(getBallArr)
                             const formatBall = balls.map((item, index, arr) => {
-                                const interceptRed = item[0].slice(2)
+                                const interceptRed = item[0].slice(2,14)
                                 const interceptBlue = item[0].slice('15')
-                                const separation = interceptRed.split(/(?=(?:..)*.$)/)
+                                // const separation = interceptRed.split(/(?=(?:..)*.$)/)
+                                const separation = this.division(interceptRed, 2)
                                 const redBall = separation.slice(0, 6)
                                 redBall.push(interceptBlue)
                                 return redBall
@@ -126,15 +131,20 @@ Page({
                             }
                             let LotteryData = JSON.stringify(LotteryDataObj)
                             wx.navigateTo({
-                                url: `../confirm/confirm?LotteryData=${LotteryData}`
+                                url: `../confirm/confirm?LotteryData=${LotteryData}`,
+                                success: res => wx.hideLoading()
                             })
-                            // console.log(LotteryDataObj)
+
                         }
                     },
-                    fail:((errMsg,code)=>{
-                        console.log(errMsg,code)
+                    fail: ((errMsg, code) => {
+                        console.log(errMsg, code)
                     })
                 })
+
+
+
+
             }
         })
 

@@ -1,4 +1,3 @@
-import { periodQuery } from "../../network/api"
 // import { myBallObj } from "./config.js"
 
 Page({
@@ -18,72 +17,80 @@ Page({
         analysisResult: null
     },
 
+    //重新识别
     retry() {
-        console.log("重新识别")
+        wx.redirectTo({
+            url: '../index/index'
+          })
     },
 
     submit() {
-        periodQuery({ expect: this.data.expect }).then(res => {
+        wx.request({
+            method: "POST",
+            url: 'https://api.wsgsb.com/users/lottery/period',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: { expect: this.data.expect },
+            success: res => {
+                let lotteryNumber = res.data.data[0].openCode.slice(0, 17)
+                let blueBall = res.data.data[0].openCode.slice(18)
+                let redBallArr = lotteryNumber.split(',')
 
-            let lotteryNumber = res.data[0].openCode.slice(0, 17)
-            let blueBall = res.data[0].openCode.slice(18)
-            let redBallArr = lotteryNumber.split(',')
+                this.setData({
+                    lotteryNumberRed: redBallArr,
+                    lotteryNumberBlue: blueBall,
+                    lotteryNumber: res.data.data[0].openCode
+                })
+                const myBallObj = this.data.myBallObj
+                const lotteryNumberRed = this.data.lotteryNumberRed
+                const lotteryNumberBlue = this.data.lotteryNumberBlue
 
-            this.setData({
-                lotteryNumberRed: redBallArr,
-                lotteryNumberBlue: blueBall
-            })
-            const myBallObj = this.data.myBallObj
-            const lotteryNumberRed = this.data.lotteryNumberRed
-            const lotteryNumberBlue = this.data.lotteryNumberBlue
+                let count = myBallObj.map((item, index) => {
+                    let filterRed = item.myRedBall.filter(res => {
+                        return res == lotteryNumberRed[0] || res == lotteryNumberRed[1] || res == lotteryNumberRed[2] || res == lotteryNumberRed[3] || res == lotteryNumberRed[4] || res == lotteryNumberRed[5]
+                    })
 
-            let count = myBallObj.map((item,index) => {
-                let filterRed = item.myRedBall.filter(res => {
-                    return res == lotteryNumberRed[0] || res == lotteryNumberRed[1] || res == lotteryNumberRed[2] || res == lotteryNumberRed[3] || res == lotteryNumberRed[4] || res == lotteryNumberRed[5]
+                    let filterBlue = item.myBlueBall.indexOf(lotteryNumberBlue)
+                    const Obj = {
+                        filterRed: filterRed.length,
+                        filterBlue
+                    }
+                    return Obj
                 })
 
-                let filterBlue = item.myBlueBall.indexOf(lotteryNumberBlue)
-                const Obj = {
-                    filterRed: filterRed.length,
-                    filterBlue
-                }
-                return Obj
-            })
+                const countText = count.map(item => {
+                    let count = item.filterRed + "+" + (item.filterBlue + 1)
+                    if (count == "6+1") {
+                        count = count + "(一等奖)"
+                    } else if (count == "6+0") {
+                        count = count + "(二等奖)"
+                    } else if (count == "5+1") {
+                        count = count + "(三等奖,单注奖金3000元)"
+                    } else if (count == "5+0" || count == "4+1") {
+                        count = count + "(四等奖,单注奖金200元)"
+                    } else if (count == "4+0" || count == "3+1") {
+                        count = count + "(五等奖,单注奖金10元)"
+                    } else if (count == "2+1" || count == "1+1" || count == "0+1") {
+                        count = count + "(六等奖,单注奖金5元)"
+                    } else {
+                        count = count + "(未中奖)"
+                    }
+                    return count
+                })
 
-            const countText = count.map(item => {
-                let count = item.filterRed + "+" + (item.filterBlue + 1)
-                if (count == "6+1") {
-                    count = count + "(一等奖)"
-                } else if (count == "6+0") {
-                    count = count + "(二等奖)"
-                } else if (count == "5+1") {
-                    count = count + "(三等奖,单注奖金3000元)"
-                } else if (count == "5+0" || count == "4+1") {
-                    count = count + "(四等奖,单注奖金200元)"
-                } else if (count == "4+0" || count == "3+1") {
-                    count = count + "(五等奖,单注奖金10元)"
-                } else if (count == "2+1" || count == "1+1" || count == "0+1") {
-                    count = count + "(六等奖,单注奖金5元)"
-                } else {
-                    count = count + "(未中奖)"
-                }
-                return count
+                myBallObj.map((item, index) => {
+                    return item.analysisResult = countText[index]
+                })
+                this.setData({
+                    myBallObj,
+                    analysisResults: true,
+                })
+            },
+            fail: ((errMsg, code) => {
+                console.log(errMsg, code)
             })
-
-            myBallObj.map((item, index) => {
-                return item.analysisResult = countText[index]
-            })
-            this.setData({
-                myBallObj,
-                analysisResults: true,
-                lotteryNumber: res.data[0].openCode 
-            })
-
         })
 
     },
-
-
 
 
 
