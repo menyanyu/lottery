@@ -1,12 +1,65 @@
-<view class="balls"  id="test">
-    <view class="redBallBox" wx:for="{{redBallList}}" wx:key="index">
-        <count size="23" color="#ffffff" id="reds{{index}}" duration="{{redDuration}}" endVal="{{item}}"></count>
+<view class="analyze">
+    <view class="ballsBox">
+        <view class="balls" id="test">
+            <view class="redBallBox" wx:for="{{redBallList}}" wx:key="index">
+                <count size="45" color="#ffffff" id="reds{{index}}" duration="{{redDuration}}" endVal="{{item}}"></count>
+            </view>
+
+            <view class="blueBallBox">
+                <count size="45" color="#ffffff" id="blue" duration="{{blueDuration}}" endVal="{{blueBall}}"></count>
+            </view>
+
+        </view>
+
+        <view class="btnGroup">
+            <button class="btn" bindtap="startRoll" disabled="{{btnDis1}}">随机一注</button>
+            <button class="btn" bindtap="startAnalysis" disabled="{{btnDis2}}">分析</button>
+        </view>
     </view>
 
-    <view class="blueBallBox">
-        <count size="23" color="#ffffff" id="blue" duration="{{blueDuration}}" endVal="{{blueBall}}"></count>
+
+    <view class="table" wx:if="{{display}}">
+        <view class="redAnalysis">
+            <view class="title"> 红球分析</view>
+            <view class="content" wx:for="{{analysisResults}}" wx:key="index">
+                <view class="content_ball">
+                    <view>{{item.redBall}}</view>
+                </view>
+                <view class="split"></view>
+                <view class="content_result">
+                    <view class="content_result_item">
+                        <view>遗漏期：<text>{{item.redForget}}</text></view>
+                        <view>出现次数：<text>{{item.redAppearCount}}</text></view>
+                    </view>
+                    <view class="content_result_item">
+                        <text style="color: #303030">{{item.redAttribute}}</text>
+                        <view>欲出几率：<text>{{item.redProbabilit}}</text></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view style="height: 50rpx;"></view>
+
+        <view class="redAnalysis">
+            <view class="title"> 蓝球分析</view>
+            <view class="content">
+                <view class="content_blue">
+                    <view>{{88}}</view>
+                </view>
+                <view class="split"></view>
+                <view class="content_result">
+                    <view class="content_result_item">
+                        <view>遗漏期：<text>{{10}}</text></view>
+                        <view>出现次数：<text>{{521}}</text></view>
+                    </view>
+                    <view class="content_result_item">
+                        <text style="color: #303030">{{"冷号"}}</text>
+                        <view>欲出几率：<text>{{0.82}}</text></view>
+                    </view>
+                </view>
+            </view>
+        </view>
     </view>
+
 </view>
-
-
-<button bindtap="startRoll" disabled="{{btnDis}}">数字滚动</button>

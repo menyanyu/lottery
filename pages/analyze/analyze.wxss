@@ -1,9 +1,23 @@
-.balls{
+.analyze{
+    margin: 50rpx 40rpx;
+}
+
+.ballsBox{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 20rpx;
+    padding: 20rpx 0;
+    margin: 40rpx 0;
+}
+
+.balls {
+    padding: 20rpx 0;
     display: flex;
     justify-content: center;
-    padding: 30rpx 0;
 }
-.redBallBox{
+
+.redBallBox {
     width: 75rpx;
     height: 75rpx;
     background-color: #ff5252;
@@ -14,7 +28,8 @@
     align-items: center;
     margin-right: 20rpx;
 }
-.blueBallBox{
+
+.blueBallBox {
     width: 75rpx;
     height: 75rpx;
     background-color: #528fff;
@@ -23,4 +38,120 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.btnGroup{
+    display: flex;
+    justify-content: space-around;
+    margin: 20rpx 0;
+}
+.btn{
+    width: 200rpx;
+    height: 75rpx;
+    display: flex;
+    border-radius: 40rpx;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 30rpx;
+    background-color: #5da3ff;
+}
+.btn::after {
+    border: none;
+   }
+
+.table {
+    width: 100%;
+    padding: 10rpx 0 100rpx 0;
+}
+
+.redAnalysis {
+    padding: 20rpx 30rpx;
+    background-color: #ffffff;
+    border-radius: 20rpx;
+}
+
+.title {
+    border-bottom: 1rpx solid #F3F4F8;
+    padding-bottom: 18rpx;
+    margin-bottom: 20rpx;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10rpx;
+}
+
+.content_ball {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+    height: 100rpx;
+    margin: 0 15rpx;
+}
+
+.split {
+    height: 70rpx;
+    border-left: 1rpx solid #F3F4F8;
+}
+
+.content_ball>view {
+    width: 70rpx;
+    height: 70rpx;
+    font-size: 40rpx;
+    color: #ffffff;
+    background-color: #ff5252;
+    border-radius: 50%;
+    box-shadow: 0rpx 0rpx 10rpx #e67777;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20rpx;
+
+}
+
+.content_result {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.content_result_item {
+    font-size: 26rpx;
+    line-height: 40rpx;
+    margin-left: 40rpx;
+}
+
+.content_result_item>view {
+    color: #717272;
+}
+
+.content_result_item>view>text {
+    color: #303030;
+}
+
+
+.content_blue{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+    height: 100rpx;
+    margin: 0 15rpx;
+
+}
+.content_blue>view{
+    width: 70rpx;
+    height: 70rpx;
+    font-size: 40rpx;
+    color: #ffffff;
+    border-radius: 50%;
+    background-color: #528FFF;
+    box-shadow: 0rpx 0rpx 10rpx #70a2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20rpx;
 }

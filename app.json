@@ -6,10 +6,11 @@
     ],
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
+        "navigationBarBackgroundColor": "#F4F5F9",
         "navigationBarTitleText": "彩票双色球",
         "navigationBarTextStyle": "black"
     },
     "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents",
     "usingComponents": {}
 }

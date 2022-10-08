@@ -16,12 +16,9 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;  
 }
-/* .table_box{
 
-} */
 .tableHeader{
     display: flex;
     justify-content: center;
@@ -74,8 +71,6 @@
     justify-content: space-around;
     align-items: center;
 }
-
-
 .retry{
     background-color: #4293FC;
     border-radius: 50rpx;
@@ -111,52 +106,6 @@
     color: #dab200;
     font-weight: 600;
 }
-/*  
-.analysisResultContent{
-    padding: 100rpx 0;
-}
-.myNumberArr{
-    width: 560rpx;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.myNumber{  
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.myNumber_item{
-    outline: 1rpx solid #aaaaaa;
-    position: relative;
-    width: 80rpx;
-    height: 70rpx;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-
-}
-
-
-.checkMark{
-    width: 35rpx;
-    height: 35rpx;
-    position: absolute;
-    bottom: 0;
-    right: 5rpx;
-}
-
-.myNumber_result{
-    width: 560rpx;
-    display: flex;
-    justify-content: center;
-    color: #D94D7F;
-    font-weight: 600;
-    font-size: 30rpx;
-    padding: 10rpx 0 50rpx 0;
-}
-*/
 
 .resultBox{
     padding: 60rpx 0 100rpx 0;
