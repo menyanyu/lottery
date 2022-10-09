@@ -45,19 +45,28 @@
             <view class="title"> 蓝球分析</view>
             <view class="content">
                 <view class="content_blue">
-                    <view>{{88}}</view>
+                    <view>{{blueBall}}</view>
                 </view>
                 <view class="split"></view>
                 <view class="content_result">
                     <view class="content_result_item">
-                        <view>遗漏期：<text>{{10}}</text></view>
-                        <view>出现次数：<text>{{521}}</text></view>
+                        <view>遗漏期：<text>{{blueAnalysis.blueForget}}</text></view>
+                        <view>出现次数：<text>{{blueAnalysis.blueAppearCount}}</text></view>
                     </view>
                     <view class="content_result_item">
-                        <text style="color: #303030">{{"冷号"}}</text>
-                        <view>欲出几率：<text>{{0.82}}</text></view>
+                        <text style="color: #303030">{{blueAnalysis.blueAttribute}}</text>
+                        <view>欲出几率：<text>{{blueAnalysis.blueProbability}}</text></view>
                     </view>
                 </view>
+            </view>
+        </view>
+        <view class="tips">
+            <view class="tips_title">参数说明</view>
+            <view class="tips_content">
+                <view>[遗漏期] 指该号码自上次开出之后的遗漏期数</view>
+                <view>[热号/冷号]指该号码遗漏6期以上为冷号，否则为热号</view>
+                <view>[出现次数] 指该号码历史上出现的次数</view>
+                <view>[欲出几率] 指该号码理论出号几率</view>
             </view>
         </view>
     </view>

@@ -12,7 +12,8 @@ Page({
         redDuration: 1500,
         blueDuration: 1500,
         display: false,
-        analysisResults: null
+        analysisResults: null,
+        blueAnalysis: null
     },
 
 
@@ -38,26 +39,36 @@ Page({
                     let json = []
                     for (let i = 0; i < 6; i++) {
                         let redAttribute = res.data.data.redForget[i]
-                        if (redAttribute>6) {
-                            redAttribute="冷号"
-                        }else{
-                            redAttribute="热号"
+                        if (redAttribute > 6) {
+                            redAttribute = "冷号"
+                        } else {
+                            redAttribute = "热号"
                         }
-
-
                         json.push({
-                            redAppearCount:res.data.data.redAppearCount[i],
-                            redForget:res.data.data.redForget[i],
-                            redProbabilit:res.data.data.redProbability[i],
-                            redBall:this.data.redBallList[i],
+                            redAppearCount: res.data.data.redAppearCount[i],
+                            redForget: res.data.data.redForget[i],
+                            redProbabilit: res.data.data.redProbability[i],
+                            redBall: this.data.redBallList[i],
                             redAttribute
                         })
                     }
+                    let blueAttribute = res.data.data.blueForget
+                    if (blueAttribute > 6) {
+                        blueAttribute = "冷号"
+                    } else {
+                        blueAttribute = "热号"
+                    }
+                    let blueObj = {
+                        blueAppearCount: res.data.data.blueAppearCount,
+                        blueForget: res.data.data.blueForget,
+                        blueProbability: res.data.data.blueProbability,
+                        blueAttribute
+                    }
 
                     this.setData({
-                        analysisResults: json
+                        analysisResults: json,
+                        blueAnalysis: blueObj
                     })
-                    console.log(json)
                 },
                 fail: err => {
                     console.log(err)
