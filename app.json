@@ -7,7 +7,7 @@
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#F4F5F9",
-        "navigationBarTitleText": "彩票双色球",
+        "navigationBarTitleText": "福彩小工具",
         "navigationBarTextStyle": "black"
     },
     "sitemapLocation": "sitemap.json",

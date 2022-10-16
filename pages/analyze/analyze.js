@@ -5,6 +5,7 @@ Page({
      */
     data: {
         redBallList: [0, 0, 0, 0, 0, 0],
+        ball: null,
         blueBall: 0,
         delay: "500",
         btnDis1: false,
@@ -30,50 +31,8 @@ Page({
             let blue = this.data.blueBall.toString()
             if (blue.length == 1) { blue = "0" + blue }
             const str = strArr.toString() + "+" + blue
-            wx.request({
-                method: "GET",
-                url: 'http://localhost:3000/users/lottery/red/count',
-                data: { data: str },
-                timeout: 10000,
-                success: res => {
-                    let json = []
-                    for (let i = 0; i < 6; i++) {
-                        let redAttribute = res.data.data.redForget[i]
-                        if (redAttribute > 6) {
-                            redAttribute = "冷号"
-                        } else {
-                            redAttribute = "热号"
-                        }
-                        json.push({
-                            redAppearCount: res.data.data.redAppearCount[i],
-                            redForget: res.data.data.redForget[i],
-                            redProbabilit: res.data.data.redProbability[i],
-                            redBall: this.data.redBallList[i],
-                            redAttribute
-                        })
-                    }
-                    let blueAttribute = res.data.data.blueForget
-                    if (blueAttribute > 6) {
-                        blueAttribute = "冷号"
-                    } else {
-                        blueAttribute = "热号"
-                    }
-                    let blueObj = {
-                        blueAppearCount: res.data.data.blueAppearCount,
-                        blueForget: res.data.data.blueForget,
-                        blueProbability: res.data.data.blueProbability,
-                        blueAttribute
-                    }
-
-                    this.setData({
-                        analysisResults: json,
-                        blueAnalysis: blueObj
-                    })
-                },
-                fail: err => {
-                    console.log(err)
-                }
-
+            this.setData({
+                ball: str
             })
 
             for (let i = 0; i < 6; i++) {
@@ -88,7 +47,6 @@ Page({
                 this.selectComponent("#blue").start();
                 resolve()
             }, 8 * this.data.delay);
-
         }).then(() => {
             const t3 = setTimeout(() => {
                 this.setData({
@@ -121,6 +79,56 @@ Page({
 
     //开始分析
     startAnalysis() {
+        wx.request({
+            method: "GET",
+            url: 'https://api.wsgsb.com/users/lottery/red/count',
+            data: { data: this.data.ball },
+            timeout: 10000,
+            success: res => {
+                let json = []
+                for (let i = 0; i < 6; i++) {
+                    let redAttribute = res.data.data.redForget[i]
+                    if (redAttribute > 6) {
+                        redAttribute = "冷号"
+                    } else {
+                        redAttribute = "热号"
+                    }
+                    json.push({
+                        redAppearCount: res.data.data.redAppearCount[i],
+                        redForget: res.data.data.redForget[i],
+                        redProbabilit: res.data.data.redProbability[i],
+                        redBall: this.data.redBallList[i],
+                        redAttribute
+                    })
+                }
+                let blueAttribute = res.data.data.blueForget
+                if (blueAttribute > 6) {
+                    blueAttribute = "冷号"
+                } else {
+                    blueAttribute = "热号"
+                }
+                let blueObj = {
+                    blueAppearCount: res.data.data.blueAppearCount,
+                    blueForget: res.data.data.blueForget,
+                    blueProbability: res.data.data.blueProbability,
+                    blueAttribute
+                }
+
+                this.setData({
+                    analysisResults: json,
+                    blueAnalysis: blueObj
+                })
+            },
+            fail: err => {
+                wx.showToast({
+                    title: '连接服务器失败',
+                })
+            }
+
+        })
+
+
+
         wx.showLoading({
             title: '分析中',
         })
@@ -132,7 +140,7 @@ Page({
                     })
                 },
             })
-        }, 1000);
+        }, 500);
     },
 
 
