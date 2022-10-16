@@ -57,7 +57,7 @@ Page({
         })
     },
 
-    //获取随机数
+    //获取随机红球和蓝球
     randomNum() {
         let list = [];
         let blue = Math.ceil(Math.random() * 16);
@@ -79,6 +79,10 @@ Page({
 
     //开始分析
     startAnalysis() {
+        wx.showLoading({
+            title: '分析中',
+        })
+
         wx.request({
             method: "GET",
             url: 'https://api.wsgsb.com/users/lottery/red/count',
@@ -113,7 +117,6 @@ Page({
                     blueProbability: res.data.data.blueProbability,
                     blueAttribute
                 }
-
                 this.setData({
                     analysisResults: json,
                     blueAnalysis: blueObj
@@ -121,17 +124,14 @@ Page({
             },
             fail: err => {
                 wx.showToast({
-                    title: '连接服务器失败',
+                    title: '服务器连接失败',
                 })
             }
-
         })
 
 
 
-        wx.showLoading({
-            title: '分析中',
-        })
+
         setTimeout(() => {
             wx.hideLoading({
                 success: (res) => {

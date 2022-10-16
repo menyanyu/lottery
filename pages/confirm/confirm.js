@@ -13,7 +13,7 @@ Page({
         lotteryNumberRed: null,
         lotteryNumberBlue: "",
         analysisResults: false,
-        analysisResultTitle: "分析结果：分析结果仅供参考，最终结果请核对彩票官网，感谢您的使用，祝您中大奖！",
+        analysisResultTitle: "查询结果：查询结果仅供参考，最终结果请核对彩票官网，感谢您的使用，祝您中大奖！",
         analysisResult: null
     },
 

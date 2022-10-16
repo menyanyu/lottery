@@ -25,15 +25,15 @@ Page({
     },
 
     //分割字符串（要分割的字符串，每隔几位数分割）
-    division(str, digit){
+    division(str, digit) {
         let arr = [];
         for (let i = 0, len = str.length / digit; i < len; i++) {
-          let subStr = str.substr(0, digit);
-          arr.push(subStr);
-          str = str.replace(subStr, "");
+            let subStr = str.substr(0, digit);
+            arr.push(subStr);
+            str = str.replace(subStr, "");
         }
         return arr;
-      },
+    },
 
 
     //拍照或选取图片进行裁剪
@@ -66,7 +66,6 @@ Page({
             visible: false,
             result: event.detail.resultSrc,
         });
-
         wx.getFileSystemManager().readFile({
             filePath: event.detail.resultSrc, //要读取的文件的路径 (本地路径)
             encoding: "base64", //指定读取文件的字符编码
@@ -87,16 +86,17 @@ Page({
                                 icon: 'error'
                             })
                         } else {
+
                             /* 格式化数据 start */
                             const arr = res.data.data.words_result
                             const regExpect = /(开奖期:\d+-\d+-\d+)|(开奖期：\d+-\d+-\d+)/g
-
                             const getLotteryPeriod = arr.map((item) => {
                                 let ballArr = item.words.match(regExpect)
                                 return ballArr
                             })
                             const expectStr = String(this.delNull(getLotteryPeriod))
 
+                            //检测开奖期是否存在，不存在则判断为非彩票
                             const patt = /开奖期/g;
                             const testing = patt.test(expectStr);
                             if (!testing) {
@@ -106,16 +106,30 @@ Page({
                                 })
                                 return
                             }
-                            const expect = expectStr.slice(4, 11)
-                            let regBall = /[A-Z]\.[0-9-]+/g
 
+                            //票面上的开奖期如果大于最新一期则判断为还未开奖
+                            const expect = expectStr.slice(4, 11)
+                            wx.request({
+                                method: 'GET',
+                                url: 'https://api.wsgsb.com/users/latest',
+                                success: res => {
+                                    if (expect > res.data.expect) {
+                                        wx.showToast({
+                                            title: '还未开奖',
+                                            icon: 'error'
+                                        })
+                                        return
+                                    }
+                                }
+                            })
+                            let regBall = /[A-Z]\.[0-9-]+/g
                             const getBallArr = arr.map((item) => {
                                 let ballArr = item.words.match(regBall)
                                 return ballArr
                             })
                             let balls = this.delNull(getBallArr)
                             const formatBall = balls.map((item, index, arr) => {
-                                const interceptRed = item[0].slice(2,14)
+                                const interceptRed = item[0].slice(2, 14)
                                 const interceptBlue = item[0].slice('15')
                                 // const separation = interceptRed.split(/(?=(?:..)*.$)/)
                                 const separation = this.division(interceptRed, 2)
@@ -141,9 +155,6 @@ Page({
                         console.log(errMsg, code)
                     })
                 })
-
-
-
 
             }
         })

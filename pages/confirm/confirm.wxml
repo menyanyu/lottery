@@ -45,7 +45,7 @@
                     <image wx:if="{{it.myBlueBall==lotteryNumberBlue}}" class="blueTick" src="../../static/img/tick.svg"></image>
                 </view>
                 <!-- 蓝号 end -->
-                <view class="resultText">分析结果：{{it.analysisResult}}</view>
+                <view class="resultText">查询结果：{{it.analysisResult}}</view>
             </view>
             
         </view>
